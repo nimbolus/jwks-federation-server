@@ -1,6 +1,6 @@
 # jwks-federation-server
 
-A simple service which serves a JWKS endpoint containing public keys which are fetched from multiple upstream sources.
+A simple HTTP service which serves a JWKS endpoint returning public keys which are fetched from multiple upstream sources.
 
 ## Usage
 
