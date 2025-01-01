@@ -20,8 +20,11 @@ type JWK struct {
 	Kty string `json:"kty"`
 	Alg string `json:"alg"`
 	Use string `json:"use"`
-	N   string `json:"n,omitempty"`
-	E   string `json:"e,omitempty"`
+	// for RSA keys
+	N string `json:"n,omitempty"`
+	E string `json:"e,omitempty"`
+	// for EC keys
+	Crv string `json:"crv,omitempty"`
 	X   string `json:"x,omitempty"`
 	Y   string `json:"y,omitempty"`
 }
