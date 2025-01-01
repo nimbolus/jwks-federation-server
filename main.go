@@ -36,12 +36,13 @@ func initConfig() {
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath(".")
+	viper.SetEnvPrefix("jwks_federation")
 	viper.AutomaticEnv()
 
-	viper.SetDefault("jwks_urls", []string{})
+	viper.SetDefault("upstream_jwks_urls", []string{})
 	viper.SetDefault("allowed_kids", []string{})
 	viper.SetDefault("update_interval", "1h")
-	viper.SetDefault("port", "8080")
+	viper.SetDefault("listen_addr", ":8080")
 
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); !ok {
@@ -79,7 +80,7 @@ func fetchJWKS(url string) (JWKS, error) {
 
 func updateJWKS() {
 	var allKeys []JWK
-	for _, url := range viper.GetStringSlice("jwks_urls") {
+	for _, url := range viper.GetStringSlice("upstream_jwks_urls") {
 		jwks, err := fetchJWKS(url)
 		if err != nil {
 			fmt.Printf("Error fetching JWKS from %s: %v\n", url, err)
@@ -121,7 +122,7 @@ func main() {
 	}()
 
 	http.HandleFunc("/.well-known/jwks.json", jwksHandler)
-	port := viper.GetString("port")
-	fmt.Printf("Server starting on :%s\n", port)
-	http.ListenAndServe(":"+port, nil)
+	addr := viper.GetString("listen_addr")
+	fmt.Printf("Server starting on %s\n", addr)
+	http.ListenAndServe(addr, nil)
 }

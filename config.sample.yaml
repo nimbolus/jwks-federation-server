@@ -1,6 +1,6 @@
-port: 8080
+listen_addr: :8080
 update_interval: 1h
-jwks_urls:
+upstream_jwks_urls:
   - https://vault.example.com/v1/identity/oidc/.well-known/keys
   - https://keycloak.example.com/realms/master/protocol/openid-connect/certs
 allowed_kids: []
