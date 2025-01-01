@@ -3,6 +3,4 @@ update_interval: 1h
 jwks_urls:
   - https://vault.example.com/v1/identity/oidc/.well-known/keys
   - https://keycloak.example.com/realms/master/protocol/openid-connect/certs
-allowed_kids:
-  - 443ec592-bdc2-49dd-abc0-c2faedc6dcda
-  - 63178a29-0382-4180-906a-9d86609645ca
+allowed_kids: []
