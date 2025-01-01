@@ -29,6 +29,9 @@ jobs:
         with:
           files: |
             Dockerfile
+            go.mod
+            go.sum
+            *.go
             .github/workflows/**/*
 
       - name: Set up QEMU
